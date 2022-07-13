@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+<arg name="open_rviz" default="true"/>
+
+<param name="robot_description" command="cat $(find robo_description)/urdf/robo.urdf"/>
+
+<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+<param name="use_gui" value="false"/>
+</node>
+<!-- Combine joint values -->
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+<!-- Show in Rviz   -->
+<!--
+<node name="rviz" pkg="rviz" type="rviz"/>
+-->
+<group if="$(arg open_rviz)">
+  <node pkg="rviz" type="rviz" name="rviz" required="true"
+        args="-d $(find robo_description)/launch/my_rviz.rviz"/>
+</group>
+</launch>
