@@ -1,0 +1,31 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="false"/>
+  <arg name="map_file" default="$(find rur_navigation)/maps/laast_map.yaml"/>
+
+  <!-- Really Usefull Robot -->
+
+  <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="$(find rur_navigation)/launch/amcl_new.launch"/>
+
+  <!-- move_base -->
+
+
+
+ <include file="$(find robo_description)/launch/robo_description.launch"/>
+ <!--
+  <include file="$(find my_robot_description)/launch/my_robot_rviz.launch"/>
+-->
+  <!-- rviz -->
+
+<!--
+  <group if="$(arg open_rviz)">
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find rur_navigation)/rviz/rur_navigation.rviz"/>
+  </group>
+ -->
+</launch>
